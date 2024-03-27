@@ -19,16 +19,29 @@ def affiche_menu(dif_modules):
     
     return module_choose
 
-json_directory = input("Veuillez entrer le chemin du répertoire contenant les fichiers JSON : ")
-
-dif_modules = {
+def test_open(path):
+    try:
+        f = open(f'{path}')
+        f.close()
+        
+        return True
+    except Exception as e:
+        print(f"Le chemin d'accès au fichier n'est pas bon.\n {e}")
+        
+good_path = False
+while not good_path:
+    json_directory = input("Veuillez entrer le chemin du répertoire contenant les fichiers JSON : ")
+    
+    dif_modules = {
     "1-3": os.path.join(json_directory, "ccna1-3.json"),
     "4-7": os.path.join(json_directory, "ccna4-7.json"),
     "8-10": os.path.join(json_directory, "ccna8-10.json"),
     "11-13": os.path.join(json_directory, "ccna11-13.json"),
     "14-15": os.path.join(json_directory, "ccna14-15.json"),
     "16-17": os.path.join(json_directory, "ccna16-17.json")
-}
+                }
+    good_path = test_open(dif_modules["1-3"])
+    
 
 if __name__ == '__main__':
     total = FINALResult()
