@@ -23,7 +23,6 @@ class DATAJson:
         for answer in user_answer:
             try:
                 if int(answer) in self.ANSWERS:
-                    print("TRUE")
                     count +=1  
             except:
                 print(f"{Style.DIM}{Fore.RED}MERCI de spécifier une valeur correcte.{Style.RESET_ALL}")
