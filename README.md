@@ -32,4 +32,4 @@ Si vous rencontrez des problèmes ou si vous avez des suggestions d'amélioratio
 ## Crédits
 Toutes les questions utilisées dans cet outil ont été tirées du site [ccnareponses.com](https://ccnareponses.com/).
 
-@virtouózos
+@lelianthorel
