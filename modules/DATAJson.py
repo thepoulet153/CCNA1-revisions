@@ -10,6 +10,8 @@ class DATAJson:
             user_answer = input("Veuillez choisir les bonnes réponses : ").split(" ")
         else:
             user_answer = input("Veuillez choisir la bonne réponse : ").split(" ")
+            if len(user_answer) > 1:
+                return False
         
         if self.is_good_a_answer(user_answer):
             return True
@@ -19,11 +21,14 @@ class DATAJson:
         
     def is_good_a_answer(self, user_answer):
         count = 0
+        pass_answer = []
         
         for answer in user_answer:
             try:
-                if int(answer) in self.ANSWERS:
-                    count +=1  
+                if int(answer) in self.ANSWERS and int(answer) not in pass_answer:
+                    count +=1
+                    pass_answer.append(int(answer))
+                    
             except:
                 print(f"{Style.DIM}{Fore.RED}MERCI de spécifier une valeur correcte.{Style.RESET_ALL}")
                 self.get_result()

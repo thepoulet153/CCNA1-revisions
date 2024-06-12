@@ -1,16 +1,19 @@
 from main_configuration import *
+from rich.console import Console
+console = Console()
 
 def lire_fichier_json(nomFich):
     try:
         with open(nomFich, "r", encoding="UTF-8") as f:
             return json.load(f)
     except FileNotFoundError:
-        print(f"Erreur : le fichier {nomFich} n'a pas été trouvé.")
+        console.print_exception(show_locals=True)
+        console.print(f"Erreur : le fichier {nomFich} n'a pas été trouvé.", style="bold red")
         return []
 
 def affiche_menu(dif_modules):
     
-    print(f"{Style.BRIGHT}{Fore.LIGHTYELLOW_EX}■■■■■■■■ MENU DE GESTION ■■■■■■■■{Fore.RESET}{Style.RESET_ALL}")
+    console.print("MENU DE GESTION", style="bold green")
     for i in dif_modules.keys():
         print(i)
     print("F : Quiter")
@@ -26,7 +29,8 @@ def test_open(path):
         
         return True
     except Exception as e:
-        print(f"Le chemin d'accès au fichier n'est pas bon.\n {e}")
+        console.print_exception(show_locals=True)
+        console.print(f"Le chemin d'accès au fichier n'est pas bon.", style="bold red")
         
 good_path = False
 while not good_path:
@@ -60,11 +64,11 @@ if __name__ == '__main__':
                 answers = jsonPrinted.ass_for_a_question()
                 
                 result = DATAJson(answers)
-                if result.get_result(): 
-                    print(f"{Fore.GREEN}■■■■■■■■ CORRECT ! ■■■■■■■■{Fore.RESET}")
+                if result.get_result():
+                    console.print(":white_check_mark: CORRECT !", style="bold green")
                     nb_good_answers = total.add_one_good_answer()
                 else:
-                    print(f"{Fore.RED}■■■■■■■■ FAUX ! ■■■■■■■■ la ou les réponses était : {answers}{Fore.RESET}")
+                    console.print(f":x: FAUX ! la ou les réponses étaient : {answers}", style="bold red")
                 
                 dataJson.remove(data)
             print(f"{Style.BRIGHT}{Fore.LIGHTYELLOW_EX}Voici le nombre de bonnes réponses : {nb_good_answers} / {nb_questions}{Fore.RESET}")
