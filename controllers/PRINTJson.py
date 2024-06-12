@@ -1,4 +1,6 @@
 from controllers.configuration import *
+from rich.console import Console
+console = Console()
 
 class PRINTJson:
     def __init__(self, data):
@@ -18,7 +20,7 @@ class PRINTJson:
         choices = self.GET_choices()
         answers = self.GET_answers()
         
-        print(f"{Fore.LIGHTBLUE_EX}{question}{Fore.RESET}")
+        console.print(f"{question}", style="italic blue")
         for choice in choices:
             print(f"{choices.index(choice)} : {choice}")
             
